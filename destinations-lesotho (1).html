@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Destinations in Lesotho</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #0f1f2e;
+            --navy-soft: #1b3347;
+            --gold: #b8924a;
+            --gold-light: #d9bb82;
+            --cream: #faf7f1;
+            --ink: #2a2f36;
+            --muted: #6b7078;
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', sans-serif; font-weight: 300;
+            color: var(--ink); background: var(--cream); line-height: 1.75;
+        }
+        h1, h2, h3, h4, h5 { font-family: 'Cormorant Garamond', serif; }
+
+        .site-nav {
+            position: sticky; top: 0; z-index: 50;
+            background: rgba(15, 31, 46, 0.95); backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgba(184, 146, 74, 0.35);
+        }
+        .site-nav .inner {
+            max-width: 1140px; margin: 0 auto; padding: 1rem 1.25rem;
+            display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .75rem;
+        }
+        .brand {
+            font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600;
+            letter-spacing: .08em; color: #fff; text-decoration: none;
+        }
+        .brand span { color: var(--gold-light); }
+        .nav-links { display: flex; flex-wrap: wrap; gap: 1.75rem; }
+        .nav-links a {
+            color: #d7dde3; text-decoration: none; font-size: .78rem; letter-spacing: .18em;
+            text-transform: uppercase; font-weight: 500; padding-bottom: 4px;
+            border-bottom: 1px solid transparent; transition: color .25s, border-color .25s;
+        }
+        .nav-links a:hover, .nav-links a.active { color: var(--gold-light); border-color: var(--gold); }
+
+        .hero {
+            position: relative; color: #fff; text-align: center; padding: 7rem 1.25rem 9rem;
+            background:
+                radial-gradient(ellipse at 50% 0%, rgba(217,187,130,.28), transparent 60%),
+                linear-gradient(180deg, var(--navy) 0%, var(--navy-soft) 100%);
+            overflow: hidden;
+        }
+        .eyebrow {
+            display: inline-block; font-size: .75rem; letter-spacing: .35em;
+            text-transform: uppercase; color: var(--gold-light); margin-bottom: 1.25rem;
+        }
+        .hero h1 { font-size: clamp(2.8rem, 7vw, 5rem); font-weight: 600; line-height: 1.05; margin-bottom: 1.25rem; }
+        .hero h1 em { color: var(--gold-light); font-weight: 500; }
+        .hero .lead { max-width: 640px; margin: 0 auto; color: #cfd6dd; font-weight: 300; font-size: 1.1rem; }
+        .divider { width: 70px; height: 1px; background: var(--gold); margin: 1.75rem auto 0; position: relative; }
+        .divider::after {
+            content: ''; position: absolute; left: 50%; top: -3px; width: 7px; height: 7px;
+            background: var(--gold); transform: translateX(-50%) rotate(45deg);
+        }
+        .mountains { position: absolute; bottom: -1px; left: 0; width: 100%; height: 110px; display: block; }
+
+        .section-title { text-align: center; margin: 4rem 0 2.5rem; }
+        .section-title h2 { font-size: 2.6rem; font-weight: 600; color: var(--navy); margin: 0; }
+
+        .place {
+            position: relative; height: 100%; background: #fff;
+            padding: 2.25rem 2rem 2rem; border: 1px solid rgba(15,31,46,.07);
+            border-radius: 2px; box-shadow: 0 10px 30px -18px rgba(15,31,46,.35);
+            transition: transform .35s ease, box-shadow .35s ease;
+        }
+        .place::before {
+            content: ''; position: absolute; top: 0; left: 0; height: 3px; width: 48px;
+            background: var(--gold); transition: width .4s ease;
+        }
+        .place:hover { transform: translateY(-6px); box-shadow: 0 22px 40px -20px rgba(15,31,46,.45); }
+        .place:hover::before { width: 100%; }
+        .place .index {
+            font-family: 'Cormorant Garamond', serif; font-size: 1rem; letter-spacing: .2em;
+            color: var(--gold); display: block; margin-bottom: .6rem;
+        }
+        .place h3 { font-size: 1.7rem; font-weight: 600; color: var(--navy); margin-bottom: .75rem; }
+        .place p { color: var(--muted); margin: 0; font-size: .97rem; }
+
+        .learn-more {
+            display: inline-flex; align-items: center; gap: .5rem; margin-top: 1.25rem;
+            padding: 0 0 4px; background: none; border: 0; border-bottom: 1px solid var(--gold);
+            color: var(--navy); font-family: 'Inter', sans-serif; font-size: .75rem; font-weight: 500;
+            letter-spacing: .18em; text-transform: uppercase; cursor: pointer;
+            transition: color .25s, gap .25s;
+        }
+        .learn-more:hover { color: var(--gold); gap: .8rem; }
+        .learn-more:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+        .learn-more .arrow { transition: transform .3s ease; }
+        .learn-more[aria-expanded="true"] .arrow { transform: rotate(90deg); }
+
+        .details { margin-top: 1.25rem; padding-top: 1.25rem; border-top: 1px solid rgba(15,31,46,.1); }
+        .details dl { margin: 0; }
+        .details dt {
+            font-size: .7rem; letter-spacing: .2em; text-transform: uppercase;
+            color: var(--gold); font-weight: 500; margin-top: .9rem;
+        }
+        .details dt:first-child { margin-top: 0; }
+        .details dd { margin: .15rem 0 0; font-size: .92rem; color: var(--ink); line-height: 1.65; }
+
+        footer {
+            margin-top: 6rem; background: var(--navy); color: #aab4be; text-align: center;
+            padding: 3rem 1rem; border-top: 3px solid var(--gold);
+        }
+        footer .f-brand { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: #fff; letter-spacing: .08em; }
+        footer p { margin: .5rem 0 0; font-size: .8rem; letter-spacing: .12em; }
+
+        @media (max-width: 576px) {
+            .nav-links { gap: 1.1rem; }
+            .hero { padding: 5rem 1.25rem 7rem; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .place, .place::before, .learn-more, .learn-more .arrow { transition: none; }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-nav">
+        <div class="inner">
+            <a class="brand" href="index-lesotho.html">VISIT <span>LESOTHO</span></a>
+            <nav class="nav-links">
+                <a href="index-lesotho.html">Home</a>
+                <a href="about-lesotho.html">About</a>
+                <a href="destinations-lesotho (1).html" class="active">Destinations</a>
+                <a href="gallery-lesotho.html">Gallery</a>
+                <a href="contact-lesotho.html">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <span class="eyebrow">Where Will You Go?</span>
+        <h1>Popular <em>Destinations</em></h1>
+        <p class="lead">From thundering waterfalls to snow-capped slopes, discover the places that make the Mountain Kingdom unforgettable.</p>
+        <div class="divider"></div>
+        <svg class="mountains" viewBox="0 0 1440 110" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path fill="#faf7f1" d="M0,110 L0,70 L160,30 L260,62 L400,12 L540,66 L660,36 L800,78 L950,18 L1080,64 L1220,32 L1340,66 L1440,44 L1440,110 Z"/>
+        </svg>
+    </section>
+
+    <main class="container">
+        <div class="section-title">
+            <span class="eyebrow">Explore</span>
+            <h2>Popular Destinations in Lesotho</h2>
+            <div class="divider"></div>
+        </div>
+
+        <div class="row g-4 justify-content-center align-items-start">
+
+            <div class="col-md-6 col-lg-4">
+                <article class="place">
+                    <span class="index">01</span>
+                    <h3>Maletsunyane Falls</h3>
+                    <p>Plunging 192 metres in a single drop, this is among the tallest single-drop waterfalls in Southern Africa. It spills into a sheer sandstone gorge near the village of Semonkong, "Place of Smoke", named for the mist that rises from its base.</p>
+                    <button class="learn-more" type="button" data-bs-toggle="collapse" data-bs-target="#more-1" aria-expanded="false" aria-controls="more-1">
+                        <span class="label">Learn more</span> <span class="arrow" aria-hidden="true">&rarr;</span>
+                    </button>
+                    <div class="collapse" id="more-1">
+                        <div class="details">
+                            <dl>
+                                <dt>Where</dt>
+                                <dd>Semonkong, Maseru District, roughly two to three hours' drive from Maseru.</dd>
+                                <dt>Do</dt>
+                                <dd>Abseil beside the falls on one of the world's longest commercial abseils, ride a Basotho pony, or hike the gorge.</dd>
+                                <dt>Best time</dt>
+                                <dd>Summer rains (November to March) give the heaviest flow; winter brings frozen edges and clear skies.</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <article class="place">
+                    <span class="index">02</span>
+                    <h3>Afriski Mountain Resort</h3>
+                    <p>At 3,222 metres in the Maluti Mountains, Afriski is the only ski resort in Southern Africa. Snow-sports season is short and special, and in warmer months the slopes turn to mountain-biking and hiking country.</p>
+                    <button class="learn-more" type="button" data-bs-toggle="collapse" data-bs-target="#more-2" aria-expanded="false" aria-controls="more-2">
+                        <span class="label">Learn more</span> <span class="arrow" aria-hidden="true">&rarr;</span>
+                    </button>
+                    <div class="collapse" id="more-2">
+                        <div class="details">
+                            <dl>
+                                <dt>Where</dt>
+                                <dd>Mahlasela Pass, Butha-Buthe District, in northern Lesotho.</dd>
+                                <dt>Do</dt>
+                                <dd>Ski, snowboard or tube in winter; mountain-bike, quad-bike or hike in summer.</dd>
+                                <dt>Best time</dt>
+                                <dd>Skiing typically runs from about June to August, helped by snowmaking. Check conditions before you travel.</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <article class="place">
+                    <span class="index">03</span>
+                    <h3>Sani Pass</h3>
+                    <p>Climbing steeply from KwaZulu-Natal into the Lesotho highlands, Sani Pass is one of Africa's most celebrated 4x4 routes. Its hairpin bends reward you with sweeping views and a summit pub often billed as the highest in Africa.</p>
+                    <button class="learn-more" type="button" data-bs-toggle="collapse" data-bs-target="#more-3" aria-expanded="false" aria-controls="more-3">
+                        <span class="label">Learn more</span> <span class="arrow" aria-hidden="true">&rarr;</span>
+                    </button>
+                    <div class="collapse" id="more-3">
+                        <div class="details">
+                            <dl>
+                                <dt>Where</dt>
+                                <dd>On the border between South Africa and Lesotho; the summit sits at about 2,876 metres.</dd>
+                                <dt>Getting there</dt>
+                                <dd>A high-clearance 4x4 is required. Many visitors join a guided tour from the South African side. Carry your passport for the border post.</dd>
+                                <dt>Best time</dt>
+                                <dd>Spring to autumn is easiest. Snow can close the pass in winter.</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <article class="place">
+                    <span class="index">04</span>
+                    <h3>Katse Dam</h3>
+                    <p>One of the highest dams in Africa, Katse is the centrepiece of the Lesotho Highlands Water Project. Its towering arch wall holds back a vast reservoir, set among remote highland valleys that are ideal for scenic drives and quiet exploration.</p>
+                    <button class="learn-more" type="button" data-bs-toggle="collapse" data-bs-target="#more-4" aria-expanded="false" aria-controls="more-4">
+                        <span class="label">Learn more</span> <span class="arrow" aria-hidden="true">&rarr;</span>
+                    </button>
+                    <div class="collapse" id="more-4">
+                        <div class="details">
+                            <dl>
+                                <dt>Where</dt>
+                                <dd>Malibamatso River, Thaba-Tseka District, in the central highlands.</dd>
+                                <dt>Do</dt>
+                                <dd>Take the dam wall tour, visit the botanical garden at Katse, or enjoy the lakeside lodge setting and the drive in.</dd>
+                                <dt>Good to know</dt>
+                                <dd>The road in is spectacular but winding. Allow plenty of daylight and refuel beforehand.</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <article class="place">
+                    <span class="index">05</span>
+                    <h3>Sehlabathebe National Park</h3>
+                    <p>A remote, peaceful corner of the Drakensberg, Sehlabathebe is part of the Maloti-Drakensberg UNESCO World Heritage Site. Expect wild grassland, rock arches and pools, and ancient San rock art, best explored slowly on foot.</p>
+                    <button class="learn-more" type="button" data-bs-toggle="collapse" data-bs-target="#more-5" aria-expanded="false" aria-controls="more-5">
+                        <span class="label">Learn more</span> <span class="arrow" aria-hidden="true">&rarr;</span>
+                    </button>
+                    <div class="collapse" id="more-5">
+                        <div class="details">
+                            <dl>
+                                <dt>Where</dt>
+                                <dd>South-eastern Lesotho, near Qacha's Nek, on the South African border.</dd>
+                                <dt>Do</dt>
+                                <dd>Hike to rock art shelters and natural arches, go pony trekking, birdwatch, or fish in the park's streams.</dd>
+                                <dt>Getting there</dt>
+                                <dd>The roads are rough and the park is remote, so a 4x4 and good planning are advised. Light aircraft access is sometimes possible.</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="f-brand">VISIT LESOTHO</div>
+        <p>&copy; 2026 Visit Lesotho &nbsp;·&nbsp; The Kingdom in the Sky</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('.learn-more').forEach(function (btn) {
+            var target = document.querySelector(btn.getAttribute('data-bs-target'));
+            var label = btn.querySelector('.label');
+            target.addEventListener('show.bs.collapse', function () { label.textContent = 'Show less'; });
+            target.addEventListener('hide.bs.collapse', function () { label.textContent = 'Learn more'; });
+        });
+    </script>
+</body>
+</html>
